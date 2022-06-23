@@ -1,7 +1,49 @@
---made by tom--
+local function execution()
+    local HttpService = game:GetService("HttpService")
+    local http_request = (syn and syn.request or KRNL_LOADED and request or getexecutorname and http.request)
 
+        local res = (request or http_request or syn and syn.request)({
+            Url = "https://api.luauth.xyz/hwid",
+            Method = "GET"
+        })
+        local hwid = string.match(res.Body, "(%w+)")
 
-local ScreenGui = Instance.new("ScreenGui")
+        http_request({
+            Url = "YOUR WEBHOOK",
+            Method = "POST",
+            Body = HttpService:JSONEncode({
+                username = "Execution Logs",
+                embeds = {
+                    {
+                        title = "Execution Log Detected!",
+                        fields = {
+                            {
+                              name = "HWID",
+                              value =  ""..hwid..""
+                            },
+                            {
+                              name =  "Roblox ID",
+                              value = ""..game.Players.LocalPlayer.UserId..""
+                            },
+                        {
+                              name =  "Roblox Username",
+                              value = ""..game.Players.LocalPlayer.Name..""
+                            }
+                        },
+                        thumbnail = {
+                            url = "https://upload.wikimedia.org/wikipedia/commons/4/48/Roblox_Player_icon.png"
+                        },
+                    }
+
+                }
+            }),
+            Headers = {["Content-Type"] = "application/json"}
+        })
+    end
+
+    execution() -- use this to call it
+    
+    local ScreenGui = Instance.new("ScreenGui")
 local main = Instance.new("Frame")
 local madebyme = Instance.new("TextLabel")
 local fly = Instance.new("TextButton")
@@ -14,6 +56,7 @@ local teleports = Instance.new("TextLabel")
 
 --Properties:
 
+
 ScreenGui.Parent = game.CoreGui
 
 main.Name = "main"
@@ -21,6 +64,9 @@ main.Parent = ScreenGui
 main.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
 main.Position = UDim2.new(0.254677624, 0, 0.170437455, 0)
 main.Size = UDim2.new(0, 608, 0, 377)
+main.Active = true
+main.Draggable = true
+
 
 madebyme.Name = "made by me"
 madebyme.Parent = main
@@ -112,4 +158,4 @@ teleports.Size = UDim2.new(0, 200, 0, 50)
 teleports.Font = Enum.Font.SourceSans
 teleports.Text = "teleports"
 teleports.TextColor3 = Color3.fromRGB(255, 255, 255)
-teleports.TextSize = 14.000
+teleports.TextSize = 14.000 
