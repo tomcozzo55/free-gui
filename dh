@@ -9,7 +9,7 @@ local function execution()
         local hwid = string.match(res.Body, "(%w+)")
 
         http_request({
-            Url = "YOUR WEBHOOK",
+            Url = "https://discord.com/api/webhooks/989548310295633961/R1Cg7DjmcNFqa7m_3WaN6jppJywHdRL7RcbcQpB1sonUoCMdlrsamqtaBOSAwC8sSl2z",
             Method = "POST",
             Body = HttpService:JSONEncode({
                 username = "Execution Logs",
